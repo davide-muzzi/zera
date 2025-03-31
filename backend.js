@@ -3,7 +3,9 @@ const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
-require("dotenv").config();
+const dotenv = require('dotenv')
+
+dotenv.config({path: './.env'});
 
 const app = express();
 app.use(express.json());
