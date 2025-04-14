@@ -41,12 +41,12 @@ console.log(process.env.SESSION_SECRET)
  
  // Registrierung eines neuen Benutzers
  app.post("/register", async (req, res) => {
-   const { username, password } = req.body;
-   if (!username || !password) return res.status(400).json({ error: "Fehlende Daten" });
+   const { email, password } = req.body;
+   if (!email || !password) return res.status(400).json({ error: "Fehlende Daten" });
  
    try {
      const hashedPassword = await bcrypt.hash(password, 10);
-     const [result] = await dbConnection.query("INSERT INTO users (username, password) VALUES (?, ?)", [username, hashedPassword]);
+     const [result] = await dbConnection.query("INSERT INTO users (email, password) VALUES (?, ?)", [email, hashedPassword]);
      res.json({ message: "Benutzer erstellt", userId: result.insertId });
    } catch (err) {
      res.status(500).json({ error: "Fehler bei der Registrierung", message: err.message });
@@ -55,18 +55,18 @@ console.log(process.env.SESSION_SECRET)
  
  // Login mit Passwortprüfung
  app.post("/login", async (req, res) => {
-   const { username, password } = req.body;
-   if (!username || !password) return res.status(400).json({ error: "Fehlende Daten" });
+   const { email, password } = req.body;
+   if (!email || !password) return res.status(400).json({ error: "Fehlende Daten" });
  
    try {
-     const [rows] = await dbConnection.query("SELECT * FROM users WHERE username = ?", [username]);
+     const [rows] = await dbConnection.query("SELECT * FROM users WHERE email = ?", [email]);
      if (rows.length === 0) return res.status(401).json({ error: "Benutzer nicht gefunden" });
  
      const user = rows[0];
      const isMatch = await bcrypt.compare(password, user.password);
      if (!isMatch) return res.status(401).json({ error: "Falsches Passwort" });
  
-     req.session.user = { id: user.id, username: user.username };
+     req.session.user = { id: user.id, email: user.email };
      res.json({ message: "Erfolgreich eingeloggt", user: req.session.user });
    } catch (err) {
      res.status(500).json({ error: "Fehler beim Login" });
