@@ -1,4 +1,6 @@
 <template>
+  <SidebarMenu.vue />
+
   <div class="calendar-layout">
     <!-- Left Panel -->
     <div class="left-panel">
@@ -51,6 +53,7 @@
 </template>
 
 <script setup>
+  import SidebarMenu from '../components/SidebarMenu.vue'
   import { ref, computed } from 'vue'
 
   const today = new Date()
