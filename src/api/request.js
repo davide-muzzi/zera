@@ -67,8 +67,8 @@ export async function registerUser (email, password) {
 //Shifts
 //start shift
 export async function startShift (current_date , current_time) {
-    console.log("current date: " +  current_time)
-    const response = await request(`/register`, {
+    console.log( JSON.stringify({current_date, current_time}))
+    const response = await request(`/start`, {
         method: 'POST',
         body: JSON.stringify({ current_date, current_time }),
     })
@@ -76,3 +76,12 @@ export async function startShift (current_date , current_time) {
     return response.data
 }
 //end shift
+export async function endShift (current_date , current_time) {
+    console.log( JSON.stringify({current_date, current_time}))
+    const response = await request(`/end`, {
+        method: 'POST',
+        body: JSON.stringify({ current_date, current_time }),
+    })
+
+    return response.data
+}

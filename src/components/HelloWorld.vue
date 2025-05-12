@@ -1,9 +1,9 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { logoutUser, startShift } from '../api/request'
+import { logoutUser, startShift,endShift } from '../api/request'
+import { ref } from 'vue';
 
-let today = new Date().toISOString().slice(0, 10)
-let current_time = 
+const startedShift = ref(false);
 
 defineProps({
   msg: String,
@@ -20,7 +20,21 @@ async function logout() {
 }
 
 async function start() {
-  startShift(today,)
+  let today = new Date().toISOString()
+  let current_day = today.slice(0, 10)
+  let current_time = today.slice(11, 19)
+
+  startedShift.value = true;
+  startShift(current_day,current_time)
+}
+
+async function end() {
+  let today = new Date().toISOString()
+  let current_day = today.slice(0, 10)
+  let current_time = today.slice(11, 19)
+
+  startedShift.value = false;
+  endShift(current_day,current_time)
 }
 
 </script>
@@ -31,7 +45,8 @@ async function start() {
   <div class="card">
     <button type="button" @click="sendToLogin">Click to attempt login</button>
     <button type="button" @click="logoutUser">Click to attempt logout</button>
-    <button type="button" @click="start">Start Shift</button>
+    <button type="button" v-if="!startedShift" @click="start">Start Shift</button>
+    <button type="button" v-if="startedShift" @click="end">End Shift</button>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR

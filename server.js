@@ -86,7 +86,21 @@ console.log(process.env.SESSION_SECRET)
     if (!current_time || !current_date) return res.status(400).json({ error: "Fehlende Daten" });
 
     try {
-      const [result] = await dbConnection.query("UPDATE shifts SET ActualStartTime = ? WHERE Date ='?'", [current_time, current_date]);
+      const [result] = await dbConnection.query("UPDATE shifts SET ActualStartTime = ? WHERE Date =?", [current_time, current_date]);
+      res.json({ message: "Shift started", time: result.insertId });
+    } catch (err) {
+      res.status(500).json({ error: "Problem during the process", message: err.message });
+    }
+  });
+
+  // sending shift end to db
+   app.post("/end", async (req, res) => {
+    if (!req.session.user) return res.status(401).json({ error: "Nicht eingeloggt" });
+    const { current_date, current_time } = req.body;
+    if (!current_time || !current_date) return res.status(400).json({ error: "Fehlende Daten" });
+
+    try {
+      const [result] = await dbConnection.query("UPDATE shifts SET ActualEndTime = ? WHERE Date =?", [current_time, current_date]);
       res.json({ message: "Shift started", time: result.insertId });
     } catch (err) {
       res.status(500).json({ error: "Problem during the process", message: err.message });
