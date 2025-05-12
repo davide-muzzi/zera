@@ -74,10 +74,24 @@ console.log(process.env.SESSION_SECRET)
  });
  
  // Geschützte Route (nur für eingeloggte Nutzer)
- app.get("/profile", (req, res) => {
+  app.get("/profile", (req, res) => {
      if (!req.session.user) return res.status(401).json({ error: "Nicht eingeloggt" });
      res.json({ message: "Willkommen im geschützten Bereich!", user: req.session.user });
    });
+
+   // sending shift start to db
+   app.post("/start", async (req, res) => {
+    if (!req.session.user) return res.status(401).json({ error: "Nicht eingeloggt" });
+    const { current_date, current_time } = req.body;
+    if (!current_time || !current_date) return res.status(400).json({ error: "Fehlende Daten" });
+
+    try {
+      const [result] = await dbConnection.query("UPDATE shifts SET ActualStartTime = ? WHERE Date ='?'", [current_time, current_date]);
+      res.json({ message: "Shift started", time: result.insertId });
+    } catch (err) {
+      res.status(500).json({ error: "Problem during the process", message: err.message });
+    }
+  });
    
    // 🚪 Logout & Session löschen
    app.post("/logout", (req, res) => {
@@ -85,7 +99,9 @@ console.log(process.env.SESSION_SECRET)
        res.json({ message: "Ausgeloggt" });
      });
    });
- 
+
+
+
  // const PORT = process.env.PORT || 3000; // Plesk gibt den Port vor
  app.listen(port, () => console.log(`Server läuft auf Port ${port}`));
  

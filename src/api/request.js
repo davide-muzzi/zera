@@ -1,25 +1,13 @@
 const backend = 'http://localhost:7070'
 
-//logs the users in
-export async function loginUser (email, password) {
-    console.log(email + " " + password)
-    const response = await request(`/login`, {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
-    })
+class ValidationError {
+    message
+    errors
 
-    return response.data
-}
-
-//register the user
-export async function registerUser (email, password) {
-    console.log(email + " " + password)
-    const response = await request(`/register`, {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
-    })
-
-    return response.data
+    constructor (message, errors) {
+        this.message = message
+        this.errors = errors
+    }
 }
 
 // Generische Request-Funktion.
@@ -42,13 +30,49 @@ async function request (url, options = {}) {
     }
 }
 
+//Users
 
-class ValidationError {
-    message
-    errors
+//logs the users in
+export async function loginUser (email, password) {
+    console.log(email + " " + password)
+    const response = await request(`/login`, {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+    })
 
-    constructor (message, errors) {
-        this.message = message
-        this.errors = errors
-    }
+    return response.data
 }
+
+//logs the users out
+export async function logoutUser () {
+    console.log("logout")
+    const response = await request(`/logout`, {
+        method: 'POST',
+    })
+
+    return response.data
+}
+
+//register the user
+export async function registerUser (email, password) {
+    console.log(email + " " + password)
+    const response = await request(`/register`, {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+    })
+
+    return response.data
+}
+
+//Shifts
+//start shift
+export async function startShift (current_date , current_time) {
+    console.log("current date: " +  current_time)
+    const response = await request(`/register`, {
+        method: 'POST',
+        body: JSON.stringify({ current_date, current_time }),
+    })
+
+    return response.data
+}
+//end shift

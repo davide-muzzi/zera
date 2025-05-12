@@ -1,6 +1,9 @@
 <script setup>
-import { ref,computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { logoutUser, startShift } from '../api/request'
+
+let today = new Date().toISOString().slice(0, 10)
+let current_time = 
 
 defineProps({
   msg: String,
@@ -12,6 +15,14 @@ async function sendToLogin() {
   router.push("/logins")
 }
 
+async function logout() {
+  logoutUser()
+}
+
+async function start() {
+  startShift(today,)
+}
+
 </script>
 
 <template>
@@ -19,7 +30,8 @@ async function sendToLogin() {
 
   <div class="card">
     <button type="button" @click="sendToLogin">Click to attempt login</button>
-
+    <button type="button" @click="logoutUser">Click to attempt logout</button>
+    <button type="button" @click="start">Start Shift</button>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
