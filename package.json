@@ -8,7 +8,8 @@
     "backend": "node backend.js",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,8 @@
     "express-session": "^1.18.1",
     "mariadb": "^3.4.0",
     "mysql2": "^3.14.0",
+    "path": "^0.12.7",
+    "server-static": "^2.0.5",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
   },
