@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HelloWorld from '../components/HelloWorld.vue'
-import LoginView from '../components/LoginView.vue'
-import RegistrationView from '../components/RegistrationView.vue'
+import HelloWorld from '../views/HelloWorld.vue'
+import LoginView from '../views/LoginView.vue'
+import RegistrationView from '../views/RegistrationView.vue'
+import CalendarView from '../views/CalendarView.vue'
+import DashboardView from '../views/DashboardView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +22,16 @@ const router = createRouter({
       path: '/registration',
       name: 'register',
       component: RegistrationView
+    },
+    {
+      path: '/calendar',
+      name: 'calendar',
+      component: CalendarView
+    },
+    {
+      path: '/dash',
+      name: 'dash',
+      component: DashboardView
     },
   ]
 })
