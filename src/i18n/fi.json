@@ -1,0 +1,70 @@
+{
+    "month_january": "Tammikuu",
+    "month_february": "Helmikuu",
+    "month_march": "Maaliskuu",
+    "month_april": "Huhtikuu",
+    "month_may": "Toukokuu",
+    "month_june": "Kesäkuu",
+    "month_july": "Heinäkuu",
+    "month_august": "Elokuu",
+    "month_september": "Syyskuu",
+    "month_october": "Lokakuu",
+    "month_november": "Marraskuu",
+    "month_december": "Joulukuu",
+  
+    "weekday_monday": "Maanantai",
+    "weekday_tuesday": "Tiistai",
+    "weekday_wednesday": "Keskiviikko",
+    "weekday_thursday": "Torstai",
+    "weekday_friday": "Perjantai",
+    "weekday_saturday": "Lauantai",
+    "weekday_sunday": "Sunnuntai",
+  
+    "weekday_monday_semi_abbreviated": "Ma",
+    "weekday_tuesday_semi_abbreviated": "Ti",
+    "weekday_wednesday_semi_abbreviated": "Ke",
+    "weekday_thursday_semi_abbreviated": "To",
+    "weekday_friday_semi_abbreviated": "Pe",
+    "weekday_saturday_semi_abbreviated": "La",
+    "weekday_sunday_semi_abbreviated": "Su",
+  
+    "weekday_monday_abbreviated": "M",
+    "weekday_tuesday_abbreviated": "T",
+    "weekday_wednesday_abbreviated": "K",
+    "weekday_thursday_abbreviated": "T",
+    "weekday_friday_abbreviated": "P",
+    "weekday_saturday_abbreviated": "L",
+    "weekday_sunday_abbreviated": "S",
+  
+    "week": "Viikko",
+    "hour_abbreviated": "t",
+    "minute_abbreviated": "min",
+  
+    "buttno_start_shift": "Aloita vuoro",
+    "estimated_earnings": "Arvioitu palkka",
+    "label_for_month_of": "kuulle",
+    "hourly_pay": "Tuntipalkka",
+    "upcoming": "Tulevat",
+    "break": "Tauko",
+    "work_time": "Työaika",
+  
+    "monthly_statement": "Kuukausiyhteenveto",
+    "actual": "Todellinen",
+    "weekly_breakdown": "Viikkoerittely",
+    "assigned_hours": "Määrätyt tunnit",
+    "worked_hours": "Tehdyt tunnit",
+    "overtime": "Ylityö",
+    "missed_hours": "Puuttuvat tunnit",
+  
+    "get_started_with": "Aloita tästä",
+  
+    "first_name": "Etunimi",
+    "last_name": "Sukunimi",
+    "password": "Salasana",
+  
+    "sign_up": "Luo tili",
+    "log_in": "Kirjaudu sisään",
+  
+    "auth_already_have_account": "Onko sinulla jo tili?",
+    "auth_no_account_yet": "Eikö sinulla ole vielä tiliä?"
+}
