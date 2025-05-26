@@ -40,7 +40,7 @@
     "hour_abbreviated": "t",
     "minute_abbreviated": "min",
   
-    "buttno_start_shift": "Aloita vuoro",
+    "button_start_shift": "Aloita vuoro",
     "estimated_earnings": "Arvioitu palkka",
     "label_for_month_of": "kuulle",
     "hourly_pay": "Tuntipalkka",
