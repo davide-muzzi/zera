@@ -1,0 +1,70 @@
+{
+    "month_january": "Enero",
+    "month_february": "Febrero",
+    "month_march": "Marzo",
+    "month_april": "Abril",
+    "month_may": "Mayo",
+    "month_june": "Junio",
+    "month_july": "Julio",
+    "month_august": "Agosto",
+    "month_september": "Septiembre",
+    "month_october": "Octubre",
+    "month_november": "Noviembre",
+    "month_december": "Diciembre",
+  
+    "weekday_monday": "Lunes",
+    "weekday_tuesday": "Martes",
+    "weekday_wednesday": "Miércoles",
+    "weekday_thursday": "Jueves",
+    "weekday_friday": "Viernes",
+    "weekday_saturday": "Sábado",
+    "weekday_sunday": "Domingo",
+  
+    "weekday_monday_semi_abbreviated": "Lun",
+    "weekday_tuesday_semi_abbreviated": "Mar",
+    "weekday_wednesday_semi_abbreviated": "Mié",
+    "weekday_thursday_semi_abbreviated": "Jue",
+    "weekday_friday_semi_abbreviated": "Vie",
+    "weekday_saturday_semi_abbreviated": "Sáb",
+    "weekday_sunday_semi_abbreviated": "Dom",
+  
+    "weekday_monday_abbreviated": "L",
+    "weekday_tuesday_abbreviated": "M",
+    "weekday_wednesday_abbreviated": "X",
+    "weekday_thursday_abbreviated": "J",
+    "weekday_friday_abbreviated": "V",
+    "weekday_saturday_abbreviated": "S",
+    "weekday_sunday_abbreviated": "D",
+  
+    "week": "Semana",
+    "hour_abbreviated": "h",
+    "minute_abbreviated": "min",
+  
+    "button_start_shift": "Iniciar turno",
+    "estimated_earnings": "Ganancia estimada",
+    "label_for_month_of": "para",
+    "hourly_pay": "Pago por hora",
+    "upcoming": "Próximo",
+    "break": "Pausa",
+    "work_time": "Tiempo de trabajo",
+  
+    "monthly_statement": "Resumen mensual",
+    "actual": "Real",
+    "weekly_breakdown": "Resumen semanal",
+    "assigned_hours": "Horas asignadas",
+    "worked_hours": "Horas trabajadas",
+    "overtime": "Horas extra",
+    "missed_hours": "Horas perdidas",
+  
+    "get_started_with": "Empieza con",
+  
+    "first_name": "Nombre",
+    "last_name": "Apellido",
+    "password": "Contraseña",
+  
+    "sign_up": "Crear cuenta",
+    "log_in": "Iniciar sesión",
+  
+    "auth_already_have_account": "¿Ya tienes cuenta?",
+    "auth_no_account_yet": "¿Aún no tienes cuenta?"
+}  

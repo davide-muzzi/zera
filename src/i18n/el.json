@@ -1,0 +1,70 @@
+{
+    "month_january": "Ιανουάριος",
+    "month_february": "Φεβρουάριος",
+    "month_march": "Μάρτιος",
+    "month_april": "Απρίλιος",
+    "month_may": "Μάιος",
+    "month_june": "Ιούνιος",
+    "month_july": "Ιούλιος",
+    "month_august": "Αύγουστος",
+    "month_september": "Σεπτέμβριος",
+    "month_october": "Οκτώβριος",
+    "month_november": "Νοέμβριος",
+    "month_december": "Δεκέμβριος",
+  
+    "weekday_monday": "Δευτέρα",
+    "weekday_tuesday": "Τρίτη",
+    "weekday_wednesday": "Τετάρτη",
+    "weekday_thursday": "Πέμπτη",
+    "weekday_friday": "Παρασκευή",
+    "weekday_saturday": "Σάββατο",
+    "weekday_sunday": "Κυριακή",
+  
+    "weekday_monday_semi_abbreviated": "Δευ",
+    "weekday_tuesday_semi_abbreviated": "Τρί",
+    "weekday_wednesday_semi_abbreviated": "Τετ",
+    "weekday_thursday_semi_abbreviated": "Πέμ",
+    "weekday_friday_semi_abbreviated": "Παρ",
+    "weekday_saturday_semi_abbreviated": "Σάβ",
+    "weekday_sunday_semi_abbreviated": "Κυρ",
+  
+    "weekday_monday_abbreviated": "Δ",
+    "weekday_tuesday_abbreviated": "Τ",
+    "weekday_wednesday_abbreviated": "Τ",
+    "weekday_thursday_abbreviated": "Π",
+    "weekday_friday_abbreviated": "Π",
+    "weekday_saturday_abbreviated": "Σ",
+    "weekday_sunday_abbreviated": "Κ",
+  
+    "week": "Εβδομάδα",
+    "hour_abbreviated": "ώ",
+    "minute_abbreviated": "λ",
+  
+    "button_start_shift": "Έναρξη βάρδιας",
+    "estimated_earnings": "Εκτιμώμενα κέρδη",
+    "label_for_month_of": "για τον",
+    "hourly_pay": "Ωρομίσθιο",
+    "upcoming": "Επερχόμενα",
+    "break": "Διάλειμμα",
+    "work_time": "Ώρες εργασίας",
+  
+    "monthly_statement": "Μηνιαία αναφορά",
+    "actual": "Πραγματικό",
+    "weekly_breakdown": "Εβδομαδιαία ανάλυση",
+    "assigned_hours": "Καθορισμένες ώρες",
+    "worked_hours": "Ώρες εργασίας",
+    "overtime": "Υπερωρίες",
+    "missed_hours": "Απουσιάζουσες ώρες",
+  
+    "get_started_with": "Ξεκίνα με",
+  
+    "first_name": "Όνομα",
+    "last_name": "Επώνυμο",
+    "password": "Κωδικός",
+  
+    "sign_up": "Εγγραφή",
+    "log_in": "Σύνδεση",
+  
+    "auth_already_have_account": "Έχεις ήδη λογαριασμό;",
+    "auth_no_account_yet": "Δεν έχεις ακόμα λογαριασμό;"
+}  
