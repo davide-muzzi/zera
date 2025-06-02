@@ -1,18 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HelloWorld from '../views/HelloWorld.vue'
 import LoginView from '../views/LoginView.vue'
 import RegistrationView from '../views/RegistrationView.vue'
 import CalendarView from '../views/CalendarView.vue'
 import DashboardView from '../views/DashboardView.vue'
+import BackendTestView from '../views/BackendTestView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HelloWorld
-    },
+
     {
       path: '/logins',
       name: 'logins',
@@ -29,9 +25,14 @@ const router = createRouter({
       component: CalendarView
     },
     {
-      path: '/dash',
+      path: '/',
       name: 'dash',
       component: DashboardView
+    },
+    {
+      path: '/back',
+      name: 'backend',
+      component: BackendTestView
     },
   ]
 })

@@ -114,7 +114,16 @@ console.log(process.env.SESSION_SECRET)
      });
    });
 
+  app.get("/shifts", async (req, res) => {
+    if (!req.session.user) return res.status(401).json({ error: "Nicht eingeloggt" });
 
+    try {
+      const [result] = await dbConnection.query("select ROUND((SUM(HOUR(ActualEndTime))- SUM(HOUR(ActualStartTime))) +  ((SUM(MINUTE(ActualEndTime)) - SUM(MINUTE(ActualStartTime)))/60)) as 'Time' from shifts where MONTH(date) = MONTH(CURDATE()) AND YEAR(date) = YEAR(CURDATE());");
+      res.json({ message: "Getting time worked", time: result.insertId });
+    } catch (err) {
+      res.status(500).json({ error: "Problem during the process", message: err.message });
+    }
+   });
 
  // const PORT = process.env.PORT || 3000; // Plesk gibt den Port vor
  app.listen(port, () => console.log(`Server läuft auf Port ${port}`));
