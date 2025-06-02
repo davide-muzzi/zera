@@ -85,3 +85,13 @@ export async function endShift (current_date , current_time) {
 
     return response.data
 }
+
+//get time worked (for money calc)
+export async function getWorkedTime() {
+    console.log( "MY EARNIGS WHYYYYYYYYYYYY:"+JSON.stringify())
+    const response = await request(`/shifts`, {
+        method: 'GET',
+    })
+
+    return response.data
+}
