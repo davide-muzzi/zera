@@ -1,10 +1,9 @@
 <template>
-    <div class="header">
-      <h1>ZERA</h1>
-      <p>Jane Doe 👤</p>
-    </div>
-  </template>
-  
-  <script setup></script>
-  
-  
+  <div class="header flex justify-between items-center">
+    <p class="text-5xl">ZERA</p>
+    <p class="text-xl">Jane Doe 👤</p>
+  </div>
+</template>
+
+<script setup></script>
+

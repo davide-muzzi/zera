@@ -7,14 +7,12 @@ const props = defineProps({
 
 const hourly = ref(20)
 let earnings = hourly.value * props.workedTime
-
-
 </script>
 
 <template>
   <!-- Earnings -->
-  <div class="grid grid-cols-2 gap-6">
-    <div class="from-black-50 col-span-2 flex items-end justify-between rounded-xl gradient-bg-2 p-6">
+  <div class="grid grid-cols-2 gap-6 bg-gradient-widget rounded-xl">
+    <div class="from-black-50 col-span-2 flex items-end justify-between gradient-bg-2 p-6">
       <div>
         <p class="text-xl font-bold">Estimated Earnings</p>
         <p class="text-sm text-gray-200">for the Month of March</p>
@@ -27,7 +25,3 @@ let earnings = hourly.value * props.workedTime
     </div>
   </div>
 </template>
-  
-
-  
-  

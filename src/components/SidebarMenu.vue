@@ -1,8 +1,8 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar h-[95]">
     <!-- Sidebar -->
     <div
-      class="flex flex-col justify-between rounded-2xl border-2 border-purple-600 bg-gray-800 p-4"
+      class="flex flex-col justify-between rounded-2xl border-2 border-purple-600 bg-gray-800 p-4 h-full"
     >
       <div class="flex flex-col gap-4">
         <button class="rounded-xl bg-black p-2">🔔</button>
