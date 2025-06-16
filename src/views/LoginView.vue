@@ -70,7 +70,7 @@ defineProps({
       </div>
 
       <p class="text-sm mt-4">Don't have an account yet?</p>
-      <RouterLink to="/signup">
+      <RouterLink to="/registration">
         <button class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-full text-white font-medium">
           Sign up
         </button>

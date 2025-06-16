@@ -1,25 +1,3 @@
-<template>
-  <div class="flex min-h-screen gap-6 bg-gray-900 p-4 font-sans text-white">
-    <SidebarMenu />
-
-    <!-- Main Content -->
-    <div class="flex w-full gap-6">
-      <!-- Main Section (Calendar, Start Shift, Earnings) -->
-      <div class="flex w-full flex-col gap-6">
-        <!-- Title -->
-        <h1 class="text-4xl font-bold"><HeaderBar /></h1>
-        <!-- Upper Section -->
-        <div class="grid grid-cols-3 gap-6">
-          <Calendar_Small />
-          <StartShiftButton />
-        </div>
-            <EarningsSummary />
-      </div>
-      <UpcomingShift />
-    </div>
-  </div>
-</template>
-
 <script setup>
 import SidebarMenu from "../components/SidebarMenu.vue";
 import HeaderBar from "../components/HeaderBar.vue";
@@ -29,8 +7,11 @@ import EarningsSummary from "../components/EarningsSummary.vue";
 import UpcomingShift from "../components/UpcomingShift.vue";
 
 import { useRouter } from 'vue-router'
-import { logoutUser, startShift,endShift } from '../api/request'
-import { ref } from 'vue';
+import { logoutUser, startShift,endShift,getWorkedTime } from '../api/request'
+import { onMounted,ref } from 'vue';
+
+const loadingEarnings = ref(true);
+const workedTime = ref(1)
 
 const startedShift = ref(false);
 
@@ -65,4 +46,47 @@ async function end() {
   startedShift.value = false;
   endShift(current_day,current_time)
 }
+ 
+async function mountProcedure() {
+        loadingEarnings.value = true
+        try {
+            const time =  await getWorkedTime()
+            
+            console.log('Worked Time geladen', time)
+            workedTime.value = time     
+        } catch (error) {
+            console.error(error)
+        } finally {
+            loadingEarnings.value = false
+        }
+    }
+    onMounted(async () => {
+        mountProcedure()
+    })
 </script>
+
+<template>
+  <div class="flex min-h-screen gap-6 bg-gray-900 p-4 font-sans text-white">
+    <SidebarMenu />
+
+    <!-- Main Content -->
+    <div class="flex w-full gap-6">
+      <!-- Main Section (Calendar, Start Shift, Earnings) -->
+      <div class="flex w-full flex-col gap-6">
+        <!-- Title -->
+        <h1 class="text-4xl font-bold"><HeaderBar /></h1>
+        <!-- Upper Section -->
+        <div class="grid grid-cols-3 gap-6">
+          <Calendar_Small />
+          <StartShiftButton />
+        </div>
+        <Suspense>
+            <EarningsSummary v-if="!loadingEarnings" :workedTime="workedTime"/>
+        </Suspense>
+      </div>
+      <UpcomingShift />
+    </div>
+  </div>
+</template>
+
+

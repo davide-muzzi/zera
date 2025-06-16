@@ -1,10 +1,12 @@
 <script setup>
 import { ref } from 'vue';
-import { getWorkedTime } from '../api/request';
 
-let workedTime = await getWorkedTime()
-let hourly = ref(20)
-let earnings = hourly.value * parseInt(workedTime)
+const props = defineProps({
+  workedTime: Number
+})
+
+const hourly = ref(20)
+let earnings = hourly.value * props.workedTime
 
 
 </script>

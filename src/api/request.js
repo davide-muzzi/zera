@@ -93,5 +93,5 @@ export async function getWorkedTime() {
         method: 'GET',
     })
 
-    return response.data
+    return 1
 }
