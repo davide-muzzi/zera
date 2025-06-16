@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.bg-gradient-button {
+  background-image: url('/src/images/gradient-bg-1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
