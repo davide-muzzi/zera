@@ -41,7 +41,7 @@ defineProps({
 
     <!-- Right Form Panel -->
     <div class="w-1/2 flex flex-col justify-center items-center px-10 space-y-6">
-      <h2 class="text-3xl font-bold">Log in</h2>
+      <h2 class="text-3xl font-bold">{{ $t('log_in') }}</h2>
       
       <div class="w-full max-w-md space-y-4">
         <input
@@ -69,10 +69,10 @@ defineProps({
         </button>
       </div>
 
-      <p class="text-sm mt-4">Don't have an account yet?</p>
+      <p class="text-sm mt-4">{{ $t('auth_no_account_yet') }}</p>
       <RouterLink to="/signup">
         <button class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-full text-white font-medium">
-          Sign up
+          {{ $t('sign_up') }}
         </button>
       </RouterLink>
     </div>
