@@ -3,6 +3,7 @@ import SidebarMenu from "../components/SidebarMenu.vue";
 import HeaderBar from "../components/HeaderBar.vue";
 import Calendar_Small from "../components/Calendar_Small.vue";
 import StartShiftButton from "../components/StartShiftButton.vue";
+import EndShiftButton from "../components/EndShiftButton.vue";
 import EarningsSummary from "../components/EarningsSummary.vue";
 import UpcomingShift from "../components/UpcomingShift.vue";
 
@@ -78,7 +79,8 @@ async function mountProcedure() {
         <!-- Upper Section -->
         <div class="grid grid-cols-3 gap-6">
           <Calendar_Small />
-          <StartShiftButton />
+          <StartShiftButton v-if="!startedShift"/>
+          <EndShiftButton v-if="startedShift"/>
         </div>
         <Suspense>
             <EarningsSummary v-if="!loadingEarnings" :workedTime="workedTime"/>
