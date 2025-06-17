@@ -72,28 +72,42 @@ onMounted(async () => {
     <!-- Main Content -->
     <div class="flex w-full gap-6">
       <!-- Main Section (Calendar, Start Shift, Earnings) -->
-      <div class="flex w-full flex-col gap-6">
+      <div class="flex w-full flex-col">
         <!-- Title -->
-        <h1 class="text-4xl font-bold"><HeaderBar /></h1>
+        <h1 class="text-4xl font-bold mt-5 mb-6"><HeaderBar /></h1>
 
-        <!-- Upper Section -->
-        <div class="grid grid-cols-4 gap-6">
-          <!-- Calendar takes 3/4 width -->
+        <!-- Spacer to push main content down -->
+        <div class="flex-grow"></div>
+
+        <!-- Lower Section: Calendar + Start/End Shift -->
+        <div class="grid grid-cols-4 gap-6 items-stretch">
+          <!-- Calendar spans 3 columns -->
           <div class="col-span-3">
             <Calendar_Small />
           </div>
 
-          <!-- Start/End Shift Button takes 1/4 width -->
-          <div class="col-span-1 flex items-start justify-center">
-            <StartShiftButton v-if="!startedShift" />
-            <EndShiftButton v-if="startedShift" />
+          <!-- Start/End Shift fills full height and centers button inside -->
+          <div class="col-span-1 flex items-center justify-center">
+            <div class="h-full w-full flex items-center justify-center">
+              <StartShiftButton v-if="!startedShift" class="w-full h-full" />
+              <EndShiftButton v-if="startedShift" class="w-full h-full" />
+            </div>
           </div>
         </div>
 
-        <!-- Earnings Summary -->
-        <Suspense>
-          <EarningsSummary v-if="!loadingEarnings" :workedTime="workedTime" />
-        </Suspense>
+       <div class="mt-6 mb-3 h-[120px] w-full">
+  <Suspense>
+    <template v-if="!loadingEarnings">
+      <EarningsSummary :workedTime="workedTime" />
+    </template>
+    <template v-else>
+      <div class="flex items-center justify-center h-full">
+        <div class="animate-spin rounded-full h-8 w-8 border-4 border-white border-t-transparent"></div>
+      </div>
+    </template>
+  </Suspense>
+</div>
+
       </div>
 
       <!-- Upcoming Shift Section -->
