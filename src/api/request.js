@@ -1,4 +1,4 @@
-const backend = 'http://localhost:7070'
+const backend = 'https://ipt71.ioannis-ligkas.bbzwinf.ch'
 
 class ValidationError {
     message

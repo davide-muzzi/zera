@@ -11,7 +11,10 @@
     "preview": "vite preview",
     "server": "node server.js",
     "test": "npm run build && npm run server"
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   },
   "repository": {
     "type": "git",
@@ -33,7 +36,7 @@
     "express-mysql-session": "^3.0.3",
     "express-session": "^1.18.1",
     "fastq": "^1.19.1",
-    "mariadb": "^3.4.0",
+    "mariadb": "^3.4.2",
     "mysql2": "^3.14.0",
     "path": "^0.12.7",
     "server-static": "^2.0.5",

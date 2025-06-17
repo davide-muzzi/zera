@@ -6,6 +6,7 @@ const MySQLStore = require("express-mysql-session")(session);
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
 const dotenv = require('dotenv')
+const mariadb = require('mariadb/callback');
 
 dotenv.config({path: './.env'});
 
@@ -16,16 +17,27 @@ var port = process.env.PORT || 7072;
 var hostname = '127.0.0.1';
 
 console.log(process.env.SESSION_SECRET)
- // MySQL-Verbindung
+ // MySQL und MariaDB Verbindung 
  const dbOptions = {
    host: process.env.DB_HOST,
+   port: process.env.DB_PORT,
    user: process.env.DB_USER,
    password: process.env.DB_PASS,
    database: process.env.DB_NAME,
  };
  
+
+const conn = mariadb.createConnection(dbOptions);
+
+if (conn.isValid()){
+  console.log("All gud")
+}
+else{
+  console.log("AAAAAAAAAAAAAAAA")
+}
+ 
  const sessionStore = new MySQLStore(dbOptions);
- const dbConnection = mysql.createPool(dbOptions);
+ //const dbConnection = mysql.createPool(dbOptions);
  
  // Session Middleware
  app.use(
@@ -38,7 +50,7 @@ console.log(process.env.SESSION_SECRET)
      cookie: { secure: false, httpOnly: true, maxAge: 1000 * 60 * 60 },
    })
  );
- 
+
  // Registrierung eines neuen Benutzers
  app.post("/register", async (req, res) => {
    const { email, password } = req.body;
@@ -46,7 +58,7 @@ console.log(process.env.SESSION_SECRET)
  
    try {
      const hashedPassword = await bcrypt.hash(password, 10);
-     const [result] = await dbConnection.query("INSERT INTO users (email, password) VALUES (?, ?)", [email, hashedPassword]);
+     const [result] = await conn.query("INSERT INTO users (email, password) VALUES (?, ?)", [email, hashedPassword]);
      res.json({ message: "Benutzer erstellt", userId: result.insertId });
    } catch (err) {
      res.status(500).json({ error: "Fehler bei der Registrierung", message: err.message });
@@ -59,7 +71,7 @@ console.log(process.env.SESSION_SECRET)
    if (!email || !password) return res.status(400).json({ error: "Fehlende Daten" });
  
    try {
-     const [rows] = await dbConnection.query("SELECT * FROM users WHERE email = ?", [email]);
+     const [rows] = await conn.query("SELECT * FROM users WHERE email = ?", [email]);
      if (rows.length === 0) return res.status(401).json({ error: "Benutzer nicht gefunden" });
  
      const user = rows[0];
@@ -86,7 +98,7 @@ console.log(process.env.SESSION_SECRET)
     if (!current_time || !current_date) return res.status(400).json({ error: "Fehlende Daten" });
 
     try {
-      const [result] = await dbConnection.query("UPDATE shifts SET ActualStartTime = ? WHERE Date =?", [current_time, current_date]);
+      const [result] = await conn.query("UPDATE shifts SET ActualStartTime = ? WHERE Date =?", [current_time, current_date]);
       res.json({ message: "Shift started", time: result.insertId });
     } catch (err) {
       res.status(500).json({ error: "Problem during the process", message: err.message });
@@ -100,7 +112,7 @@ console.log(process.env.SESSION_SECRET)
     if (!current_time || !current_date) return res.status(400).json({ error: "Fehlende Daten" });
 
     try {
-      const [result] = await dbConnection.query("UPDATE shifts SET ActualEndTime = ? WHERE Date =?", [current_time, current_date]);
+      const [result] = await conn.query("UPDATE shifts SET ActualEndTime = ? WHERE Date =?", [current_time, current_date]);
       res.json({ message: "Shift started", time: result.insertId });
     } catch (err) {
       res.status(500).json({ error: "Problem during the process", message: err.message });
@@ -118,7 +130,7 @@ console.log(process.env.SESSION_SECRET)
     if (!req.session.user) return res.status(401).json({ error: "Nicht eingeloggt" });
 
     try {
-      const [result] = await dbConnection.query("select Sum(MinsOfBreak) as time from shifts ");
+      const [result] = await conn.query("select Sum(MinsOfBreak) as time from shifts ");
       res.json({ message: "Test3", time: result[0] });
       // res.json({ message: "Getting time worked", time: result.insertId });
     } catch (err) {
@@ -128,4 +140,5 @@ console.log(process.env.SESSION_SECRET)
 
  // const PORT = process.env.PORT || 3000; // Plesk gibt den Port vor
  app.listen(port, () => console.log(`Server läuft auf Port ${port}`));
+
  //select ROUND((SUM(HOUR(ActualEndTime))- SUM(HOUR(ActualStartTime))) +  ((SUM(MINUTE(ActualEndTime)) - SUM(MINUTE(ActualStartTime)))/60)) as 'Time' from shifts where MONTH(date) = MONTH(CURDATE()) AND YEAR(date) = YEAR(CURDATE());
