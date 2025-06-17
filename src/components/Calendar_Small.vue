@@ -4,13 +4,13 @@
         <div class="col-span-2 rounded-xl bg-gray-800 p-4">
           <h2 class="text-lg text-gray-300">March, 2025</h2>
           <div class="mt-4 grid grid-cols-7 gap-1 text-center text-sm text-gray-400">
-            <div>MON</div>
-            <div>TUE</div>
-            <div>WED</div>
-            <div>THU</div>
-            <div>FRI</div>
-            <div>SAT</div>
-            <div>SUN</div>
+            <div>{{ $t('weekday_monday_semi_abbreviated') }}</div>
+            <div>{{ $t('weekday_tuesday_semi_abbreviated') }}</div>
+            <div>{{ $t('weekday_wednesday_semi_abbreviated') }}</div>
+            <div>{{ $t('weekday_thursday_semi_abbreviated') }}</div>
+            <div>{{ $t('weekday_friday_semi_abbreviated') }}</div>
+            <div>{{ $t('weekday_saturday_semi_abbreviated') }}</div>
+            <div>{{ $t('weekday_sunday_semi_abbreviated') }}</div>
             <div class="col-span-6"></div>
             <div class="text-white">01</div>
             <div>02</div>

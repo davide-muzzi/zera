@@ -1,4 +1,6 @@
 <script setup>
+import AuthBrand from '@/components/AuthBrand.vue'
+import SignupForm from '@/components/SignupForm.vue'
 import { ref,computed } from 'vue'
 import {registerUser} from "../api/request"
 import { useRouter } from 'vue-router'
@@ -28,21 +30,18 @@ async function register () {
     errors.value = exception.errors
   }
 }
-
 </script>
 
 <template>
-    <h1>{{ msg }}</h1>
-  
-    <div class="card">
-        <button type="button" @click="register">Click to attempt a registration</button>
+  <div class="flex flex-row h-screen w-screen bg-gray-900 p-4">
+    <!-- Left logo area -->
+    <div class="w-1/2">
+      <AuthBrand />
     </div>
-    <p>This is the registration</p>
-  </template>
-  
-  <style scoped>
-  .read-the-docs {
-    color: #888;
-  }
-  </style>
-  
+
+    <!-- Right signup form -->
+    <div class="w-1/2 flex items-center justify-center">
+      <SignupForm />
+    </div>
+  </div>
+</template>

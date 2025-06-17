@@ -1,16 +1,16 @@
 <template>
     <div class="flex flex-col items-center justify-center w-full max-w-sm space-y-4">
-      <h2 class="text-white text-2xl font-semibold">Sign up</h2>
+      <h2 class="text-white text-2xl font-semibold">{{ $t('sign_up') }}</h2>
       <div class="flex space-x-2 w-full">
         <input type="text" placeholder="First Name" class="input" />
         <input type="text" placeholder="Last Name" class="input" />
       </div>
       <input type="email" placeholder="Email" class="input" />
       <input type="password" placeholder="Password" class="input" />
-      <button class="btn-white">Sign up</button>
-      <p class="text-sm text-white">Already have an Account?</p>
+      <button class="btn-white">{{ $t('sign_up') }}</button>
+      <p class="text-sm text-white">{{ $t('auth_already_have_account') }}</p>
       <router-link to="/login">
-        <button class="btn-purple">Log in</button>
+        <button class="btn-purple">{{ $t('log_in') }}</button>
       </router-link>
     </div>
 </template>

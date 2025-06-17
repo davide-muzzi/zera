@@ -1,12 +1,12 @@
 <template>
     <div class="flex flex-col items-center justify-center w-full max-w-sm space-y-4">
-      <h2 class="text-white text-2xl font-semibold">Log in</h2>
+      <h2 class="text-white text-2xl font-semibold">{{ $t('log_in') }}</h2>
       <input type="email" placeholder="Email" class="input" />
       <input type="password" placeholder="Password" class="input" />
-      <button class="btn-white">Log in</button>
-      <p class="text-sm text-white">Dont have an Account yet?</p>
+      <button class="btn-white">{{ $t('log_in') }}</button>
+      <p class="text-sm text-white">{{ $t('auth_no_account_yet') }}</p>
       <router-link to="/signup">
-        <button class="btn-purple">Sign up</button>
+        <button class="btn-purple">{{ $t('sign_up') }}</button>
       </router-link>
     </div>
 </template>

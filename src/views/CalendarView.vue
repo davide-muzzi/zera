@@ -12,7 +12,7 @@
       <div class="next-month-preview">
         <div class="preview-month-label">{{ nextMonthName }}</div>
         <div class="preview-grid">
-          <div class="day-name" v-for="d in ['M', 'T', 'W', 'T', 'F', 'S', 'S']" :key="d">{{ d }}</div>
+          <div class="day-name" v-for="d in weekdays_abbreviated" :key="d">{{ d }}</div>
           <div
             class="preview-day"
             v-for="day in previewDays"
@@ -28,7 +28,7 @@
     <div class="calendar-container">
       <div class="calendar">
         <div class="calendar-grid">
-          <div class="day-name" v-for="d in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']" :key="d">
+          <div class="day-name" v-for="d in weekdays_semi_abbreviated" :key="d">
             {{ d }}
           </div>
 
@@ -53,82 +53,120 @@
 </template>
 
 <script setup>
-  import SidebarMenu from '../components/SidebarMenu.vue'
-  import { ref, computed } from 'vue'
+import SidebarMenu from '../components/SidebarMenu.vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-  const today = new Date()
-  const yyyy = today.getFullYear()
-  const mm = String(today.getMonth() + 1).padStart(2, '0')
-  const dd = String(today.getDate()).padStart(2, '0')
-  const todayStr = `${yyyy}-${mm}-${dd}`
+const { t } = useI18n()
 
-  const currentYear = yyyy
-  const currentMonth = today.getMonth()
+const today = new Date()
+const yyyy = today.getFullYear()
+const mm = String(today.getMonth() + 1).padStart(2, '0')
+const dd = String(today.getDate()).padStart(2, '0')
+const todayStr = `${yyyy}-${mm}-${dd}`
 
+const currentYear = yyyy
+const currentMonth = today.getMonth()
 
-  const workSchedule = {
-    '2025-05-16': '9:00-12:00',
-    '2025-05-18': '13:00-17:00',
-    '2025-05-22': '8:30-17:00',
-    '2025-05-27': '10:00-15:30'
+const workSchedule = {
+  '2025-05-16': '9:00-12:00',
+  '2025-05-18': '13:00-17:00',
+  '2025-05-22': '8:30-17:00',
+  '2025-05-27': '10:00-15:30'
+}
+
+// i18n weekday abbreviations
+const weekdays_abbreviated = computed(() => [
+  t('weekday_monday_abbreviated'),
+  t('weekday_tuesday_abbreviated'),
+  t('weekday_wednesday_abbreviated'),
+  t('weekday_thursday_abbreviated'),
+  t('weekday_friday_abbreviated'),
+  t('weekday_saturday_abbreviated'),
+  t('weekday_sunday_abbreviated')
+])
+
+const weekdays_semi_abbreviated = computed(() => [
+  t('weekday_monday_semi_abbreviated'),
+  t('weekday_tuesday_semi_abbreviated'),
+  t('weekday_wednesday_semi_abbreviated'),
+  t('weekday_thursday_semi_abbreviated'),
+  t('weekday_friday_semi_abbreviated'),
+  t('weekday_saturday_semi_abbreviated'),
+  t('weekday_sunday_semi_abbreviated')
+])
+
+// current and next month names
+const monthNames = computed(() => [
+  t('month_january'),
+  t('month_february'),
+  t('month_march'),
+  t('month_april'),
+  t('month_may'),
+  t('month_june'),
+  t('month_july'),
+  t('month_august'),
+  t('month_september'),
+  t('month_october'),
+  t('month_november'),
+  t('month_december')
+])
+
+const currentMonthName = computed(() => monthNames.value[currentMonth])
+const nextMonthName = computed(() => monthNames.value[nextMonth])
+
+// calendar grid logic
+const getDaysInMonth = (year, month) => {
+  const days = []
+  const firstDayOfMonth = new Date(year, month, 1)
+  let dayOfWeek = firstDayOfMonth.getDay() // 0 = Sunday
+  dayOfWeek = dayOfWeek === 0 ? 6 : dayOfWeek - 1
+
+  for (let i = 0; i < dayOfWeek; i++) {
+    days.push({ day: '', dateStr: '', date: null })
   }
 
-  const getDaysInMonth = (year, month) => {
-    const days = []
-    const firstDayOfMonth = new Date(year, month, 1)
-    let dayOfWeek = firstDayOfMonth.getDay() // 0 = Sunday
-    dayOfWeek = dayOfWeek === 0 ? 6 : dayOfWeek - 1
-
-    for (let i = 0; i < dayOfWeek; i++) {
-      days.push({ day: '', dateStr: '', date: null })
-    }
-
-    const daysInCurrentMonth = new Date(year, month + 1, 0).getDate()
-    for (let day = 1; day <= daysInCurrentMonth; day++) {
-      const date = new Date(year, month, day)
-      const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
-      days.push({ day, dateStr, date })
-    }
-
-    return days
+  const daysInCurrentMonth = new Date(year, month + 1, 0).getDate()
+  for (let day = 1; day <= daysInCurrentMonth; day++) {
+    const date = new Date(year, month, day)
+    const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+    days.push({ day, dateStr, date })
   }
 
-  const daysInMonth = ref(getDaysInMonth(currentYear, currentMonth))
+  return days
+}
 
-  const isWorkday = (dateStr) => dateStr in workSchedule
-  const getWorkHours = (dateStr) => workSchedule[dateStr]
+const daysInMonth = ref(getDaysInMonth(currentYear, currentMonth))
+const isWorkday = (dateStr) => dateStr in workSchedule
+const getWorkHours = (dateStr) => workSchedule[dateStr]
 
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-                      'July', 'August', 'September', 'October', 'November', 'December']
-  const currentMonthName = computed(() => monthNames[currentMonth])
+// next month preview
+const previewDays = ref([])
+const generatePreviewDays = () => {
+  const firstDay = new Date(nextYear, nextMonth, 1)
+  let startDay = firstDay.getDay()
+  startDay = startDay === 0 ? 6 : startDay - 1
 
-  const nextMonth = (currentMonth + 1) % 12
-  const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear
-  const nextMonthName = monthNames[nextMonth]
+  const dayCount = new Date(nextYear, nextMonth + 1, 0).getDate()
+  const days = []
 
-  // preview: just show a flat list of days (no shift info)
-  const previewDays = ref([])
-  const generatePreviewDays = () => {
-    const firstDay = new Date(nextYear, nextMonth, 1)
-    let startDay = firstDay.getDay()
-    startDay = startDay === 0 ? 6 : startDay - 1
-
-    const dayCount = new Date(nextYear, nextMonth + 1, 0).getDate()
-    const days = []
-
-    for (let i = 0; i < startDay; i++) {
-      days.push({ day: '', id: `pad-${i}` })
-    }
-
-    for (let d = 1; d <= dayCount; d++) {
-      days.push({ day: d, id: `next-${d}` })
-    }
-
-    previewDays.value = days
+  for (let i = 0; i < startDay; i++) {
+    days.push({ day: '', id: `pad-${i}` })
   }
 
-  generatePreviewDays()
+  for (let d = 1; d <= dayCount; d++) {
+    days.push({ day: d, id: `next-${d}` })
+  }
+
+  previewDays.value = days
+}
+
+const nextMonth = (currentMonth + 1) % 12
+const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear
+
+generatePreviewDays()
 </script>
+
 
 <style scoped>
   .calendar-layout {
