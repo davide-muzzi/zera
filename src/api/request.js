@@ -1,4 +1,4 @@
-const backend = 'https://apiv1zera.zera.bbzwinf.ch'
+const backend = 'http://localhost:7070'
 
 class ValidationError {
     message
