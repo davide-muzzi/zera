@@ -60,7 +60,7 @@ npm install
 Before running the app, set up the database:
 
 1. Open your MariaDB client.
-2. Copy and execute the provided SQL scripts to create the required tables.
+2. Copy and execute the provided SQL script from `/zera/SQL Files/create.sql` to create the required tables.
 3. Ensure your database configuration matches the backend settings.
 
 ### Run the app
