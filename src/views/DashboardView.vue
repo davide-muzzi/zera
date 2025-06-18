@@ -89,8 +89,8 @@ onMounted(async () => {
           <!-- Start/End Shift fills full height and centers button inside -->
           <div class="col-span-1 flex items-center justify-center">
             <div class="h-full w-full flex items-center justify-center">
-              <StartShiftButton v-if="!startedShift" class="w-full h-full" />
-              <EndShiftButton v-if="startedShift" class="w-full h-full" />
+              <StartShiftButton v-if="!startedShift" @click="start" class="w-full h-full" />
+              <EndShiftButton v-if="startedShift" @click="end" class="w-full h-full" />
             </div>
           </div>
         </div>

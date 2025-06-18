@@ -6,14 +6,14 @@
     >
       <div class="flex flex-col gap-4">
         <button class="rounded-xl bg-black p-2">🔔</button>
-        <button class="rounded-xl bg-purple-600 p-2" @click="sendToLogin">
+        <button @click="sendToHome" class="rounded-xl bg-purple-600 p-2" >
           🏠
         </button>
-        <button class="rounded-xl bg-black p-2">📅</button>
+        <button class="rounded-xl bg-black p-2" @click="sendToCalendar">📅</button>
         <button class="rounded-xl bg-black p-2">📂</button>
         <button class="rounded-xl bg-black p-2">⚙️</button>
       </div>
-      <button class="rounded-xl bg-black p-2">⏏️</button>
+      <button class="rounded-xl bg-black p-2" @click="sendToLogin" >⏏️</button>
     </div>
   </div>
 </template>
@@ -24,5 +24,12 @@ const router = useRouter();
 
 async function sendToLogin() {
   router.push("/logins");
+}
+
+async function sendToCalendar() {
+  router.push("/calendar");
+}
+async function sendToHome() {
+  router.push("/");
 }
 </script>

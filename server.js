@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cors = require('cors')
 const session = require("express-session");
+var serveStatic = require('serve-static');
 const MySQLStore = require("express-mysql-session")(session);
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
@@ -13,6 +14,7 @@ dotenv.config({path: './.env'});
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(serveStatic(__dirname + "/dist")); //nicht im plesk benutzen, dass ist nur für local testing
 var port = process.env.PORT || 7073;
 
 console.log(process.env.SESSION_SECRET)

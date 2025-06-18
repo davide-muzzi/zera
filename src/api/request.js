@@ -1,4 +1,4 @@
-const backend = 'https://apiv1.ioannis-ligkas.bbzwinf.ch'
+const backend = 'https://apiv1zera.zera.bbzwinf.ch'
 
 class ValidationError {
     message

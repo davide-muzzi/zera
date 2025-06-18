@@ -5,9 +5,9 @@
         <input type="text" placeholder="First Name" class="input" />
         <input type="text" placeholder="Last Name" class="input" />
       </div>
-      <input type="email" placeholder="Email" class="input" />
-      <input type="password" placeholder="Password" class="input" />
-      <button class="btn-white">{{ $t('sign_up') }}</button>
+      <input type="email" v-model="email" placeholder="Email" class="input" />
+      <input type="password" v-model="password" placeholder="Password" class="input" />
+      <button @click="register" class="btn-white">{{ $t('sign_up') }}</button>
       <p class="text-sm text-white">{{ $t('auth_already_have_account') }}</p>
       <router-link to="/login">
         <button class="btn-purple">{{ $t('log_in') }}</button>
@@ -16,6 +16,35 @@
 </template>
   
 <script setup>
+import { ref,computed } from 'vue'
+import {registerUser} from "../api/request"
+import { useRouter } from 'vue-router'
+
+const password = ref('1234567890')
+const email = ref('bepis')
+
+defineProps({
+  msg: String,
+})
+
+const errors = ref({
+    email: '',
+    password: '',
+})
+
+const router = useRouter()
+
+async function register () {
+  try {
+    await registerUser(email.value, password.value)
+    await router.push('/logins')    
+  } catch (exception) {
+
+    console.error('login error', exception)
+
+    errors.value = exception.errors
+  }
+}
 </script>
   
 <style scoped>

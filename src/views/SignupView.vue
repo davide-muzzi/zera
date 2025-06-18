@@ -1,35 +1,7 @@
 <script setup>
-import AuthBrand from '@/components/AuthBrand.vue'
-import SignupForm from '@/components/SignupForm.vue'
-import { ref,computed } from 'vue'
-import {registerUser} from "../api/request"
-import { useRouter } from 'vue-router'
+import AuthBrand from '../components/AuthBrand.vue'
+import SignupForm from '../components/SignupForm.vue'
 
-const password = ref('1234567890')
-const email = ref('bepis')
-
-defineProps({
-  msg: String,
-})
-
-const errors = ref({
-    email: '',
-    password: '',
-})
-
-const router = useRouter()
-
-async function register () {
-  try {
-    await registerUser(email.value, password.value)
-    await router.push('/logins')    
-  } catch (exception) {
-
-    console.error('login error', exception)
-
-    errors.value = exception.errors
-  }
-}
 </script>
 
 <template>
