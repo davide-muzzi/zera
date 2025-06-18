@@ -9,7 +9,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "server": "node server.js"
+    "server": "node server.js",
+    "test": "npm run build && npm run server"
   },
   "repository": {
     "type": "git",
@@ -31,11 +32,12 @@
     "express-mysql-session": "^3.0.3",
     "express-session": "^1.18.1",
     "fastq": "^1.19.1",
-    "mariadb": "^3.4.0",
+    "mariadb": "^3.4.2",
     "mysql2": "^3.14.0",
     "path": "^0.12.7",
     "server-static": "^2.0.5",
     "vue": "^3.5.13",
+    "vue-i18n": "^11.1.5",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {

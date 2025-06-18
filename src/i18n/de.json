@@ -1,0 +1,70 @@
+{
+    "month_january": "Januar",
+    "month_february": "Februar",
+    "month_march": "März",
+    "month_april": "April",
+    "month_may": "Mai",
+    "month_june": "Juni",
+    "month_july": "Juli",
+    "month_august": "August",
+    "month_september": "September",
+    "month_october": "Oktober",
+    "month_november": "November",
+    "month_december": "Dezember",
+  
+    "weekday_monday": "Montag",
+    "weekday_tuesday": "Dienstag",
+    "weekday_wednesday": "Mittwoch",
+    "weekday_thursday": "Donnerstag",
+    "weekday_friday": "Freitag",
+    "weekday_saturday": "Samstag",
+    "weekday_sunday": "Sonntag",
+  
+    "weekday_monday_semi_abbreviated": "Mo",
+    "weekday_tuesday_semi_abbreviated": "Di",
+    "weekday_wednesday_semi_abbreviated": "Mi",
+    "weekday_thursday_semi_abbreviated": "Do",
+    "weekday_friday_semi_abbreviated": "Fr",
+    "weekday_saturday_semi_abbreviated": "Sa",
+    "weekday_sunday_semi_abbreviated": "So",
+  
+    "weekday_monday_abbreviated": "M",
+    "weekday_tuesday_abbreviated": "D",
+    "weekday_wednesday_abbreviated": "M",
+    "weekday_thursday_abbreviated": "D",
+    "weekday_friday_abbreviated": "F",
+    "weekday_saturday_abbreviated": "S",
+    "weekday_sunday_abbreviated": "S",
+  
+    "week": "Woche",
+    "hour_abbreviated": "Std",
+    "minute_abbreviated": "Min",
+  
+    "button_start_shift": "Jetzt starten",
+    "estimated_earnings": "Geschätzter Verdienst",
+    "label_for_month_of": "für den",
+    "hourly_pay": "Stundenlohn",
+    "upcoming": "Bevorstehend",
+    "break": "Pause",
+    "work_time": "Arbeitszeit",
+  
+    "monthly_statement": "Monatsabrechnung",
+    "actual": "Tatsächlich",
+    "weekly_breakdown": "Wöchentliche Übersicht",
+    "assigned_hours": "Zugewiesene Stunden",
+    "worked_hours": "Geleistete Stunden",
+    "overtime": "Überstunden",
+    "missed_hours": "Fehlstunden",
+  
+    "get_started_with": "Lege los mit",
+  
+    "first_name": "Vorname",
+    "last_name": "Nachname",
+    "password": "Passwort",
+  
+    "sign_up": "Registrieren",
+    "log_in": "Einloggen",
+  
+    "auth_already_have_account": "Schon ein Konto?",
+    "auth_no_account_yet": "Noch kein Konto?"
+}

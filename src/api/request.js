@@ -1,4 +1,4 @@
-const backend = 'http://localhost:7070'
+const backend = 'https://apiv1.ioannis-ligkas.bbzwinf.ch'
 
 class ValidationError {
     message
@@ -82,6 +82,16 @@ export async function endShift (current_date , current_time) {
         method: 'POST',
         body: JSON.stringify({ current_date, current_time }),
     })
+
+    return response.data
+}
+
+//get time worked (for money calc)
+export async function getWorkedTime() {
+    const response = await request(`/shifts`, {
+        method: 'GET',
+    })
+    console.log( "MY EARNIGS WHYYYYYYYYYYYY:"+JSON.stringify(response.data))
 
     return response.data
 }
