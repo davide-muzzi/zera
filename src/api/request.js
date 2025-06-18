@@ -1,4 +1,4 @@
-const backend = 'https://ipt71.ioannis-ligkas.bbzwinf.ch'
+const backend = 'https://apiv1.ioannis-ligkas.bbzwinf.ch'
 
 class ValidationError {
     message

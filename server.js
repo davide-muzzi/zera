@@ -1,20 +1,19 @@
 var express = require('express');
 var path = require('path');
-var serveStatic = require('serve-static');
+var cors = require('cors')
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
-const dotenv = require('dotenv')
-const mariadb = require('mariadb/callback');
+const dotenv = require('dotenv');
+const mariadb = require('mariadb');
 
 dotenv.config({path: './.env'});
 
 const app = express();
 app.use(express.json());
-app.use(serveStatic(__dirname + "/dist"));
-var port = process.env.PORT || 7072;
-var hostname = '127.0.0.1';
+app.use(cors());
+var port = process.env.PORT || 7073;
 
 console.log(process.env.SESSION_SECRET)
  // MySQL und MariaDB Verbindung 
@@ -27,17 +26,11 @@ console.log(process.env.SESSION_SECRET)
  };
  
 
-const conn = mariadb.createConnection(dbOptions);
-
-if (conn.isValid()){
-  console.log("All gud")
-}
-else{
-  console.log("AAAAAAAAAAAAAAAA")
-}
- 
- const sessionStore = new MySQLStore(dbOptions);
+const conn = mariadb.createPool(dbOptions);
  //const dbConnection = mysql.createPool(dbOptions);
+
+const sessionStore = new MySQLStore(dbOptions);
+
  
  // Session Middleware
  app.use(
@@ -138,7 +131,6 @@ else{
     }
    });
 
- // const PORT = process.env.PORT || 3000; // Plesk gibt den Port vor
  app.listen(port, () => console.log(`Server läuft auf Port ${port}`));
 
  //select ROUND((SUM(HOUR(ActualEndTime))- SUM(HOUR(ActualStartTime))) +  ((SUM(MINUTE(ActualEndTime)) - SUM(MINUTE(ActualStartTime)))/60)) as 'Time' from shifts where MONTH(date) = MONTH(CURDATE()) AND YEAR(date) = YEAR(CURDATE());
