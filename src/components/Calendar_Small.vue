@@ -1,7 +1,7 @@
 <template>
     <div class="calendar-small">
       <!-- Calendar -->
-        <div class="col-span-2 rounded-xl bg-gray-800 p-4">
+        <div class="col-span-2< rounded-xl bg-gray-800 p-4">
           <h2 class="text-lg text-gray-300">March, 2025</h2>
           <div class="mt-4 grid grid-cols-7 gap-1 text-center text-sm text-gray-400">
             <div>{{ $t('weekday_monday_semi_abbreviated') }}</div>

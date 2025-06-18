@@ -1,49 +1,60 @@
 <template>
-  <SidebarMenu.vue />
+  <div class="flex h-screen text-white font-sans bg-gray-800 p-6 gap-6">
+    <SidebarMenu class="flex-shrink-0" />
 
-  <div class="calendar-layout">
-    <!-- Left Panel -->
-    <div class="left-panel">
-      <div class="month-heading">
-        <div class="month-label">{{ currentMonthName }}</div>
-        <div class="year-label">{{ currentYear }}</div>
-      </div>
+    <div class="flex flex-col flex-grow overflow-hidden rounded-r-2xl bg-gray-800 p-6">
+      <div class="flex gap-8 h-full overflow-hidden">
+        <!-- Left Panel -->
+        <div class="w-56 flex-shrink-0 flex flex-col gap-6">
+          <div class="flex flex-col items-start">
+            <div class="text-4xl font-bold">{{ currentMonthName }}</div>
+            <div class="text-xl text-gray-400 mt-1">{{ currentYear }}</div>
+          </div>
 
-      <div class="next-month-preview">
-        <div class="preview-month-label">{{ nextMonthName }}</div>
-        <div class="preview-grid">
-          <div class="day-name" v-for="d in weekdays_abbreviated" :key="d">{{ d }}</div>
-          <div
-            class="preview-day"
-            v-for="day in previewDays"
-            :key="day.id"
-          >
-            {{ day.day }}
+          <div>
+            <div class="text-lg font-semibold mb-2">{{ nextMonthName }}</div>
+            <div class="grid grid-cols-7 gap-1 text-gray-400 text-sm">
+              <div v-for="d in ['M', 'T', 'W', 'T', 'F', 'S', 'S']" :key="d" class="text-center">{{ d }}</div>
+              <div
+                v-for="day in previewDays"
+                :key="day.id"
+                class="text-center"
+              >
+                {{ day.day }}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Right Panel -->
-    <div class="calendar-container">
-      <div class="calendar">
-        <div class="calendar-grid">
-          <div class="day-name" v-for="d in weekdays_semi_abbreviated" :key="d">
-            {{ d }}
-          </div>
+        <!-- Right Panel -->
+        <div class="flex-grow overflow-auto flex justify-center">
+          <div>
+            <div class="grid grid-cols-7 gap-1.5 mb-1">
+              <div
+                v-for="d in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']"
+                :key="d"
+                class="font-bold text-gray-400 text-center"
+              >
+                {{ d }}
+              </div>
+            </div>
 
-          <div
-            class="day"
-            v-for="day in daysInMonth"
-            :key="day.dateStr + day.day"
-            :class="{
-              workday: isWorkday(day.dateStr),
-              today: day.dateStr === todayStr
-            }"
-          >
-            <div class="date">{{ day.day }}</div>
-            <div class="shift" v-if="isWorkday(day.dateStr)">
-              {{ getWorkHours(day.dateStr) }}
+            <div class="grid grid-cols-7 gap-1.5">
+              <div
+                v-for="day in daysInMonth"
+                :key="day.dateStr + day.day"
+                :class="[
+                  'w-[5rem] aspect-square rounded-lg p-1 flex flex-col justify-start items-start gap-0.5',
+                  'bg-gray-700',
+                  { 'border-2 border-purple-600': isWorkday(day.dateStr) },
+                  { 'bg-purple-600 text-white border-none': day.dateStr === todayStr }
+                ]"
+              >
+                <div class="font-bold text-white text-sm">{{ day.day }}</div>
+                <div v-if="isWorkday(day.dateStr)" class="text-blue-400 text-xs mt-auto">
+                  {{ getWorkHours(day.dateStr) }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -55,9 +66,6 @@
 <script setup>
 import SidebarMenu from '../components/SidebarMenu.vue'
 import { ref, computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
 
 const today = new Date()
 const yyyy = today.getFullYear()
@@ -75,51 +83,10 @@ const workSchedule = {
   '2025-05-27': '10:00-15:30'
 }
 
-// i18n weekday abbreviations
-const weekdays_abbreviated = computed(() => [
-  t('weekday_monday_abbreviated'),
-  t('weekday_tuesday_abbreviated'),
-  t('weekday_wednesday_abbreviated'),
-  t('weekday_thursday_abbreviated'),
-  t('weekday_friday_abbreviated'),
-  t('weekday_saturday_abbreviated'),
-  t('weekday_sunday_abbreviated')
-])
-
-const weekdays_semi_abbreviated = computed(() => [
-  t('weekday_monday_semi_abbreviated'),
-  t('weekday_tuesday_semi_abbreviated'),
-  t('weekday_wednesday_semi_abbreviated'),
-  t('weekday_thursday_semi_abbreviated'),
-  t('weekday_friday_semi_abbreviated'),
-  t('weekday_saturday_semi_abbreviated'),
-  t('weekday_sunday_semi_abbreviated')
-])
-
-// current and next month names
-const monthNames = computed(() => [
-  t('month_january'),
-  t('month_february'),
-  t('month_march'),
-  t('month_april'),
-  t('month_may'),
-  t('month_june'),
-  t('month_july'),
-  t('month_august'),
-  t('month_september'),
-  t('month_october'),
-  t('month_november'),
-  t('month_december')
-])
-
-const currentMonthName = computed(() => monthNames.value[currentMonth])
-const nextMonthName = computed(() => monthNames.value[nextMonth])
-
-// calendar grid logic
 const getDaysInMonth = (year, month) => {
   const days = []
   const firstDayOfMonth = new Date(year, month, 1)
-  let dayOfWeek = firstDayOfMonth.getDay() // 0 = Sunday
+  let dayOfWeek = firstDayOfMonth.getDay()
   dayOfWeek = dayOfWeek === 0 ? 6 : dayOfWeek - 1
 
   for (let i = 0; i < dayOfWeek; i++) {
@@ -137,10 +104,18 @@ const getDaysInMonth = (year, month) => {
 }
 
 const daysInMonth = ref(getDaysInMonth(currentYear, currentMonth))
+
 const isWorkday = (dateStr) => dateStr in workSchedule
 const getWorkHours = (dateStr) => workSchedule[dateStr]
 
-// next month preview
+const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December']
+const currentMonthName = computed(() => monthNames[currentMonth])
+
+const nextMonth = (currentMonth + 1) % 12
+const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear
+const nextMonthName = monthNames[nextMonth]
+
 const previewDays = ref([])
 const generatePreviewDays = () => {
   const firstDay = new Date(nextYear, nextMonth, 1)
@@ -161,122 +136,5 @@ const generatePreviewDays = () => {
   previewDays.value = days
 }
 
-const nextMonth = (currentMonth + 1) % 12
-const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear
-
 generatePreviewDays()
 </script>
-
-
-<style scoped>
-  .calendar-layout {
-    display: flex;
-    flex-direction: row;
-    max-width: 1100px;
-    margin: auto;
-    color: white;
-    font-family: sans-serif;
-  }
-
-  .left-panel {
-    width: 220px;
-    padding: 16px;
-    background-color: #1c1c1c;
-    border-radius: 16px 0 0 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 24px;
-  }
-
-  .month-heading {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .month-label {
-    font-size: 2.4em;
-    font-weight: bold;
-  }
-
-  .year-label {
-    font-size: 1.4em;
-    color: #ccc;
-    margin-top: 4px;
-  }
-
-  .preview-month-label {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 4px;
-  }
-
-  .preview-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-    font-size: 0.9em;
-    color: #ccc;
-  }
-
-  .preview-day {
-    text-align: center;
-  }
-
-  .calendar-container {
-    background-color: #1c1c1c;
-    border-radius: 0 16px 16px 0;
-    padding: 16px;
-    flex-grow: 1;
-    width: 100%;
-  }
-
-  .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-  }
-
-  .day-name {
-    font-weight: bold;
-    text-align: center;
-    padding-bottom: 4px;
-    color: #ccc;
-  }
-
-  .day {
-    aspect-ratio: 1 / 1;
-    background-color: #2a2a2a;
-    border-radius: 10px;
-    padding: 6px 6px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    position: relative;
-    gap: 4px;
-  }
-
-  .date {
-    font-size: 1em;
-    font-weight: bold;
-    color: white;
-  }
-
-  .shift {
-    font-size: 0.75em;
-    margin-top: auto;
-    color: #80c0ff;
-  }
-
-  .workday {
-    border: 2px solid #805fff;
-  }
-
-  .today {
-    background-color: #805fff;
-    color: white;
-    border: none;
-  }
-</style>
