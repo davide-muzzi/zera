@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
-import RegistrationView from '../views/RegistrationView.vue'
+import SignupView from '../views/SignupView.vue'
 import CalendarView from '../views/CalendarView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import BackendTestView from '../views/BackendTestView.vue'
@@ -17,7 +17,7 @@ const router = createRouter({
     {
       path: '/registration',
       name: 'register',
-      component: RegistrationView
+      component: SignupView
     },
     {
       path: '/calendar',

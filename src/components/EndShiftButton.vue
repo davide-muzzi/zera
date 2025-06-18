@@ -1,11 +1,11 @@
 <template>
     <!-- End Shift -->
-          <button>
-        <div class="from-black-50 flex items-start justify-start rounded-xl bg-gradient-to-b to-purple-600 p-4 text-3xl font-bold">
-          END <br />
-          SHIFT
-        </div>
-      </button>
+         <button
+    class="bg-gradient-button text-white rounded-xl px-6 py-4 text-3xl font-bold inline-block w-full h-full flex flex-col items-start justify-start text-left">
+    END <br />
+    SHIFT
+  </button>
+
   </template>
   
   <script setup></script>
